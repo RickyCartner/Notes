@@ -1,0 +1,8 @@
+https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+
+=========================
+Clone from GitHub
+=========================
+1) cd folder/to/clone-into/
+2) git clone [GitHub repository] ie. https://github.com/RickyCartner/WUnderground.git
+
