@@ -35,21 +35,45 @@ env:
   #   - 749 # RHEL Automation - Development Branch - development 
   #   - 758 # RHEL Compliance Jobs @ 09:19:32:1932 AM - main 
 jobs:
-  job-loop:
+  compute:
     runs-on: ubuntu-latest
+    outputs:
+      PROJECT_DEV_IDs: ${{ env.PROJECT_DEV_IDs }}
+      PROJECT_PROD_IDs: ${{ env.PROJECT_PROD_IDs }}
+    steps:
+      - name: Compute outputs
+        run: |
+          echo "PROJECT_DEV_IDs=${{ env.PROJECT_DEV_IDs }}" >> $GITHUB_OUTPUT
+          echo "PROJECT_PROD_IDs=${{ env.PROJECT_PROD_IDs }}" >> $GITHUB_OUTPUT
+
+  build_test:
+    runs-on: ubuntu-latest
+    needs: compute
     strategy:
       matrix:
-        # dev_id: ${{ fromJSON(env.PROJECT_DEV_IDs) }}
-        # items: [item1, item2, item3, item4] # Replace with your list items
-        PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
-        PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
+        devid: ["${{ needs.compute.outputs.PROJECT_DEV_IDs }}"]
+
     steps:
-      - name: collect variables
-        uses: actions/setup-node@v4
-        # run: |
-        #   echo Item: $ {{ matrix.dev_id }}
-        with:
-          devid: ${{ matrix.PROJECT_DEV_IDs }}
+      - name: Run matrix for ${{ matrix.devid }}
+        run: |
+          echo "Channel: ${{ matrix.devid }}"
+
+# jobs:
+#   job-loop:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         # dev_id: ${{ fromJSON(env.PROJECT_DEV_IDs) }}
+#         # items: [item1, item2, item3, item4] # Replace with your list items
+#         PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
+#         PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
+#     steps:
+#       - name: collect variables
+#         uses: actions/setup-node@v4
+#         # run: |
+#         #   echo Item: $ {{ matrix.dev_id }}
+#         with:
+#           devid: ${{ matrix.PROJECT_DEV_IDs }}
     # - name: Print item
     #   run: |
     #     echo Item: $ {{ matrix.dev_id }}
