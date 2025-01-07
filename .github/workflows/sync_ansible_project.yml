@@ -39,9 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        items: [item1, item2, item3, item4]
+        items: [item1, item2, item3, item4] # Replace with your list items
     steps:
-      - name: Display items
-        run: echo "Item: ${{ matrix.items }}"
-
-
+    - name: Print item
+      run: echo "Item: ${{ matrix.items }}"
