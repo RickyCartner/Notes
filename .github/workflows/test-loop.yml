@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      colors: ${{ steps.colors.outputs.colors }}
+      colors: ${{ steps.colors.outputs.colores }}
 
     steps:
       - name: Define Colors
         id: colors
         run: |
-          echo 'colors=["red", "green", "blue"]' >> "$GITHUB_OUTPUT"
+          echo 'colores=["red", "green", "blue"]' >> "$GITHUB_OUTPUT"
 
   print-output:
     runs-on: ubuntu-latest
