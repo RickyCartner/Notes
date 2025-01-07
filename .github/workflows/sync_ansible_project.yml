@@ -35,16 +35,30 @@ env:
   #   - 749 # RHEL Automation - Development Branch - development 
   #   - 758 # RHEL Compliance Jobs @ 09:19:32:1932 AM - main 
 jobs:
-  loop:
+  job-loop:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dev_id: ${{ fromJSON(env.PROJECT_DEV_IDs) }}
+        # dev_id: ${{ fromJSON(env.PROJECT_DEV_IDs) }}
         # items: [item1, item2, item3, item4] # Replace with your list items
-        # PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
-        # PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
+        PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
+        PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
     steps:
-    - name: Print item
-      run: |
-        echo Item: $ {{ matrix.dev_id }}
-        # echo Item: ${{ matrix.PROJECT_DEV_IDs }}
+      - name: collect variables
+        uses: actions/setup-node@v4
+        # run: |
+        #   echo Item: $ {{ matrix.dev_id }}
+        with:
+          devid: ${{ matrix.PROJECT_DEV_IDs }}
+    # - name: Print item
+    #   run: |
+    #     echo Item: $ {{ matrix.dev_id }}
+    #     # echo Item: ${{ matrix.PROJECT_DEV_IDs }}
+
+ # job-print:
+ #    needs: job-loop
+ #    runs-on: ubuntu-latest
+ #    strategy:
+ #      matrix: ${{ fromJSON(needs.job2.outputs.matrix) }}
+ #    steps:
+ #      - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"
