@@ -10,10 +10,10 @@ on:
 #       - name: my-step
 #         run: echo "Hello World!"
 # Add a note
-env:
-  # NUMBERS: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10'
-  PROJECT_DEV_IDs: '562, 586, 591, 645, 681, 683, 723, 728, 732, 907'
-  PROJECT_PROD_IDs: '513, 535, 576, 598, 705, 730, 749, 758'
+# env:
+#   # NUMBERS: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10'
+#   PROJECT_DEV_IDs: '562, 586, 591, 645, 681, 683, 723, 728, 732, 907'
+#   PROJECT_PROD_IDs: '513, 535, 576, 598, 705, 730, 749, 758'
   # PROJECT_DEV_IDs:
   #   - 562 # RHEL Automation - main 
   #   - 586 # RHEL 8 STIG - dev - development 
@@ -39,15 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
-        PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
+        items: [item1, item2, item3, item4]
     steps:
       - name: Display items
-        run: echo 'Item: ${{ matrix.PROJECT_DEV_IDs }}'
+        run: echo "Item: ${{ matrix.items }}"
 
-# Something new
-        # uses: actions/checkout@v4
-        # uses: ricky-defaults/sync_ansible_project@feature/action-test
-        # with:
-        #   items: ${{ env.PROJECT_DEV_IDs }}
-        #   command: 'echo "Count $ITEM"'
+
