@@ -41,7 +41,7 @@ jobs:
       matrix:
         # items: [item1, item2, item3, item4] # Replace with your list items
         PROJECT_DEV_IDs: [562, 586, 591, 645, 681, 683, 723, 728, 732, 907]
-        # PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
+        PROJECT_PROD_IDs: [513, 535, 576, 598, 705, 730, 749, 758]
     steps:
     - name: Print item
       run: |
