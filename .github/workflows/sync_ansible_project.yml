@@ -35,11 +35,13 @@ env:
   #   - 749 # RHEL Automation - Development Branch - development 
   #   - 758 # RHEL Compliance Jobs @ 09:19:32:1932 AM - main 
 jobs:
-  build:
+  loop:
     runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
     steps:
       - name: 'Count from 1 to 10 with items from an environment variable'
-        uses: actions/checkout@v4
+        # uses: actions/checkout@v4
         # uses: ricky-defaults/sync_ansible_project@feature/action-test
         with:
           items: ${{ env.PROJECT_DEV_IDs }}
