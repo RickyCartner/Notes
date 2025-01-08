@@ -12,7 +12,7 @@ jobs:
     outputs:
       colors: ${{ steps.colors.outputs.colores }}
       project-string: ${{ steps.project-string-step.outputs.json-project-string }}
-      # project-json: ${{ steps.json-project-step.outputs.json-project }}
+      project-json: ${{ steps.json-project-step.outputs.json-project }}
 
     steps:
       - name: Define Colors
@@ -24,6 +24,7 @@ jobs:
         id: project-string-step
         run: |
           echo 'json-project-string={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
+          echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
         # echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"}, \
         # {"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
 
@@ -49,6 +50,10 @@ jobs:
       - name: Print colors variable
         run: |
           echo ${{ needs.define-matrix.outputs.colors }}
+
+      - name: Print project-json variable
+        run: |
+          echo "${{ toJson(needs.define-matrix.outputs.project-json) }}"
 
       - name: Print project-json variable
         run: |
