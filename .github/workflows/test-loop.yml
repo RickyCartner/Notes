@@ -88,7 +88,7 @@ jobs:
 
     strategy:
       matrix:
-        value: ${{ fromJson(needs.print-output.outputs.astring) }}
+        value: ${{ toJson(needs.print-output.outputs.astring) }}
 
     steps:
       - name: Print project-string variable
