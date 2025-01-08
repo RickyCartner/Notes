@@ -62,7 +62,7 @@ jobs:
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         env:
-          COUNT: ${{ toJson(needs.define-matrix.outputs.project-string.include[]) }}
+          COUNT: ${{ toJson(needs.define-matrix.outputs.project-string.include[0]) }}
           # INCLUDES: ${{ toJson(needs.define-matrix.outputs.project-string) }}
           # PROJECTS: ${{ toJson(needs.define-matrix.outputs.project-string[0].projects) }}
           # CONFIGS: ${{ toJson(needs.define-matrix.outputs.project-string[0]).configs }}
