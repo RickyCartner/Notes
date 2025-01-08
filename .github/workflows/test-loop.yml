@@ -48,7 +48,7 @@ jobs:
     needs: define-matrix
 
     strategy:
-      matrix: ${{ fromJSON(needs.define-matrix.outputs.project-string) }}
+      matrix: ${{ fromJSON(needs.define-matrix.outputs.project-string.include) }}
       
     steps:
       # - name: Print colors variable
@@ -56,7 +56,7 @@ jobs:
       #     echo ${{ needs.define-matrix.outputs.colors }}
 
       - name: Build project
-        run: echo "Building project ${{ matrix.include.project }} with config ${{ matrix.include.config }}"
+        run: echo "Building project ${{ matrix.project }} with config ${{ matrix.config }}"
 
       - name: Print project-json variable
         id: print-stuff
