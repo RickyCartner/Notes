@@ -44,5 +44,5 @@ jobs:
       - name: Print project-json variable
         id: print-array-item
         run: |
-          echo ${{ matrix.include[].project }}
+          echo ${{ matrix.include.project }}
           echo ${{ matrix }} | jq -r '.include[].project'
