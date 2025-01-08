@@ -30,6 +30,7 @@ jobs:
         run: |
           echo ${{ toJson(needs.define-matrix.outputs.json-project) }}
           echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
+          echo "Running project ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'"
 
   # Job 3: Loop through array
   print-array-output:
@@ -37,11 +38,11 @@ jobs:
     needs: define-matrix
 
     strategy:
-      matrix: ${{ fromJson(needs.define-matrix.outputs.json-project.1.include) }}
+      matrix: ${{ fromJson(needs.define-matrix.outputs.json-project).include }}
       
     steps:
       - name: Print project-json variable
         id: print-array-item
         run: |
-          echo ${{ matrix.include.project }}
-          echo ${{ matrix }} | jq -r '.include[].project'
+          echo ${{ matrix.project }}
+          echo ${{ matrix }} | jq -r '.project'
