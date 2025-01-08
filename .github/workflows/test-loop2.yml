@@ -28,8 +28,8 @@ jobs:
       - name: Print project-json variable
         id: print-stuff
         run: |
-          echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
-          echo ${{ toJson(needs.define-matrix.outputs.project-string) }} | jq -r '.include[].project'
+          echo ${{ toJson(needs.define-matrix.outputs.json-project) }}
+          echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
 
   # Job 3: Loop through array
   print-array-output:
