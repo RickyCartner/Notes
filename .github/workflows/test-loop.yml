@@ -48,7 +48,7 @@ jobs:
     needs: define-matrix
 
     outputs:
-      astring: ${{ steps.project-string-step.outputs.json-project-string }}
+      astring: ${{ steps.build-stuff.outputs.astring }}
         
     # strategy:
     #   matrix: ${{ fromJSON(toJson(needs.define-matrix.outputs.project-string).include) }}
