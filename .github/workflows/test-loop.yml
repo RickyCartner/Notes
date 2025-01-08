@@ -53,9 +53,9 @@ jobs:
 
       - name: Print project-json variable
         run: |
-          echo "${{ toJson(needs.define-matrix.outputs.project-json) }}"
+          echo ${{ toJson(needs.define-matrix.outputs.project-json) }}
 
-      - name: Print project-json variable
+      - name: Print project-string variable
         run: |
           echo "The outputs are ${{ toJson(needs.define-matrix.outputs.project-string) }}"
         # echo "The outputs are ${{ toJson(needs.define-matrix.outputs.project-string) }}"
