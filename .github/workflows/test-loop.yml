@@ -23,7 +23,7 @@ jobs:
       - name: Define Project String
         id: project-string-step
         run: |
-          echo 'json-project-string={\"count\":4,\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}' >> "$GITHUB_OUTPUT"
+          echo "json-project-string={\"count\":4,\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> "$GITHUB_OUTPUT"
         # echo 'json-project-string={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
         # echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
         # echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"}, \
