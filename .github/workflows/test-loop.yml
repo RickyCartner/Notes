@@ -46,7 +46,16 @@ jobs:
   print-output:
     runs-on: ubuntu-latest
     needs: define-matrix
+    
+    outputs:
+      project-json-values: ${{ steps.convert-values.outputs.project-json-values }}
+      
     steps:
+      - name: Convert values
+        id: convert-values
+        run: |
+          echo "project-json-values=(${{ toJson(needs.define-matrix.outputs.project-string) }} | jq -r '.include[].project')" >> $GITHUB_ENV 
+        
       - name: Print colors variable
         run: |
           echo ${{ needs.define-matrix.outputs.colors }}
@@ -55,14 +64,15 @@ jobs:
         run: |
           echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
           echo ${{ toJson(needs.define-matrix.outputs.project-string) }} | jq -r '.include[].project'
-          echo "includes:" $(echo $COUNT) }}
+          echo ${{ project-json-values }}
+        # echo "includes:" $(echo $COUNT) }}
         # echo "projects:" $(echo $COUNT | jq -r 'include[].project')
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         env:
-          COUNT: ${{ toJson(needs.define-matrix.outputs.project-string) | jq -r '.include[].project' }}
+          COUNT: ${{ toJson(needs.define-matrix.outputs.project-string) }}
           # INCLUDES: ${{ toJson(needs.define-matrix.outputs.project-string) }}
           # PROJECTS: ${{ toJson(needs.define-matrix.outputs.project-string[0].projects) }}
           # CONFIGS: ${{ toJson(needs.define-matrix.outputs.project-string[0]).configs }}
