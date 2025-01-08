@@ -54,8 +54,9 @@ jobs:
       - name: Print project-json variable
         run: |
           echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
-          echo "includes:" $(echo $COUNT.include[] | jq -r '.project')
-          echo "projects:" $(echo $COUNT | jq -r 'include[].project')
+          echo ${{ toJson(needs.define-matrix.outputs.project-string) }}  | jq -r '.include[].project'
+          echo "includes:" $(echo $COUNT| jq -r 'include[0].project')
+        # echo "projects:" $(echo $COUNT | jq -r 'include[].project')
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
         # echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
