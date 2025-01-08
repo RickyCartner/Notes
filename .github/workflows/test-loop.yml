@@ -86,15 +86,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: print-output
 
-    strategy:
-      matrix:
-        value: ${{ fromJson(needs.print-output.outputs.astring) }}
+    # strategy:
+    #   matrix:
+    #     value: ${{ fromJson(needs.print-output.outputs.astring) }}
 
     steps:
       - name: Print project-string variable
         run: |
-          echo "${{ toJson(matrix.value) }}"
-        # echo ${{ toJson(needs.print-output.outputs.astring) }}
+          echo ${{ toJson(needs.print-output.outputs.astring) }}
+        # echo "${{ toJson(matrix.value) }}"
+          
 
           
         # echo "The outputs are ${{ toJson(needs.define-matrix.outputs.project-string) }}"
