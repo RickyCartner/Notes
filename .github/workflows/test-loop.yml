@@ -35,7 +35,7 @@ jobs:
 
       - name: Print project-json variable
         run: |
-          echo ${{ needs.define-matrix.outputs.project-json }}
+          echo ${{ fromJson(needs.define-matrix.outputs.project-json) }}
 
   # Job 3: Display data using "run" and "with"
   # produce-artifacts:
