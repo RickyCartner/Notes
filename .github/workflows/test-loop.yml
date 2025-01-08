@@ -25,7 +25,12 @@ jobs:
           echo 'json-project=$( \
           {\"count\":4,\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"}, \
           {\"project\":\"bar\",\"config\":\"Release\"}]} \
-          ') >> "$GITHUB_OUTPUT"
+          )' >> "$GITHUB_OUTPUT"
+        # echo "project-response=$(curl --insecure --request GET \
+        # --header 'authorization: Bearer ${{ secrets.authorization_token }}' \
+        # --header 'content-type: application/json' \
+        # --url ${{ vars.ansible_url }}projects/?scm_url=git%40git.bcbssc.com%3AInformationSystems%2Funix_platform_ansible.git \
+        # )" >> $GITHUB_OUTPUT
 
   ## Job 2: Print the output of the "define-matrix" job
   print-output:
