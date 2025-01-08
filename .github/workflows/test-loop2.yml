@@ -45,5 +45,5 @@ jobs:
       - name: Print project-json variable
         id: print-array-item
         run: |
-          echo ${{ matrix.project }}
-          echo ${{ matrix }} | jq -r '.project'
+          echo "The project ID is: ${{ matrix.project }}"
+        # echo ${{ matrix }} | jq -r '.project'
