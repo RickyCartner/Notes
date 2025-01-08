@@ -12,7 +12,7 @@ jobs:
     outputs:
       colors: ${{ steps.colors.outputs.colores }}
       project-string: ${{ steps.project-string-step.outputs.json-project-string }}
-      project-json: ${{ steps.project-string-step.outputs.json-project }}
+      # project-json: ${{ steps.project-string-step.outputs.json-project }}
 
     steps:
       - name: Define Colors
@@ -23,8 +23,9 @@ jobs:
       - name: Define Project String
         id: project-string-step
         run: |
-          echo 'json-project-string={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
-          echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
+          echo 'json-project-string={\"count\":4,\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}' >> "$GITHUB_OUTPUT"
+        # echo 'json-project-string={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
+        # echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
         # echo 'json-project={"count":4,"include":[{"project":"foo","config":"Debug"}, \
         # {"project":"bar","config":"Release"}]}' >> "$GITHUB_OUTPUT"
 
