@@ -56,7 +56,7 @@ jobs:
       #     echo ${{ needs.define-matrix.outputs.colors }}
 
       - name: Build project
-        run: echo "Building project ${{ matrix.project }} with config ${{ matrix.config }}"
+        run: echo "Building project ${{ matrix.include.project }} with config ${{ matrix.include.config }}"
 
       - name: Print project-json variable
         id: print-stuff
