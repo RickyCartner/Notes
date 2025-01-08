@@ -37,7 +37,7 @@ jobs:
     needs: define-matrix
 
     strategy:
-      matrix: ${{ fromJson(needs.define-matrix.outputs.json-project) }}
+      matrix: ${{ fromJson(needs.define-matrix.outputs.json-project).include }}
       
     steps:
       - name: Print project-json variable
