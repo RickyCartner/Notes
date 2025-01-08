@@ -39,10 +39,6 @@ jobs:
         # --url ${{ vars.ansible_url }}projects/?scm_url=git%40git.bcbssc.com%3AInformationSystems%2Funix_platform_ansible.git \
         # )" >> $GITHUB_OUTPUT
 
-      # - name: Define JSON
-      #   id: json-project-step
-      #   run: |
-      #     echo '
   ## Job 2: Print the output of the "define-matrix" job
   print-output:
     runs-on: ubuntu-latest
@@ -61,6 +57,17 @@ jobs:
 
       # - name: Build project
       #   run: echo "Building project ${{ matrix.project }} with config ${{ matrix.config }}"
+
+      - name: JSON to variables
+        id: content
+        uses: TheWolfNL/frontmatter-to-json@v1
+        with:
+          content: '---\ntitle: lorem ipsum\ndescription: hello world\nnumber: 42\ndate: 2024-12-31\n---\n\n# Header 1 #\n\nParagraph 1'
+          # content: ${{ needs.define-matrix.outputs.project-string }}
+
+      - name: Output JSON
+        run: |
+          echo '${{ steps.content.outputs.json }}' | jq
 
       - name: Build project
         id: build-stuff
