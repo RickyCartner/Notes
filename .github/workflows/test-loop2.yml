@@ -1,0 +1,48 @@
+---
+name: Test Loop
+on:
+  push:
+    branches: [development]
+    
+jobs:
+  # Job 1: Collect data
+  define-matrix:
+    runs-on: ubuntu-latest
+
+    outputs:
+      json-project: ${{ steps.project-step.outputs.json-project }}
+
+    steps:
+      - name: Define Project String
+        id: project-step
+        run: |
+          echo "json-project={\"count\":2,\"include\":[{\"project\":\"1\",\"config\":\"Debug\"},{\"project\":\"2\",\"config\":\"Release\"}]}" >> "$GITHUB_OUTPUT"
+        
+
+  # Job 2: Print the output of the "define-matrix" job
+  print-output:
+    runs-on: ubuntu-latest
+    needs: define-matrix
+      
+    steps:
+      - name: Print project-json variable
+        id: print-stuff
+        run: |
+          echo ${{ toJson(needs.define-matrix.outputs.project-string) }}
+          echo ${{ toJson(needs.define-matrix.outputs.project-string) }} | jq -r '.include[].project'
+
+  # Job 3: Loop through array
+  print-array-output:
+    runs-on: ubuntu-latest
+    needs: define-matrix
+
+    strategy:
+      matrix:
+        value: ${{ fromJson(needs.define-matrix.outputs.json-project) }}
+      
+    steps:
+      - name: Print project-json variable
+        id: print-array-item
+        run: |
+          echo ${{ matrix.include[].project }}
+          echo ${{ matrix }} | jq -r '.include[].project'
