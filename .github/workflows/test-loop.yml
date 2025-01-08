@@ -23,7 +23,7 @@ jobs:
         id: json-project-step
         run: |
           echo 'json-project={\"count\":4,\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}'
-          >> $GITHUB_OUTPUT
+          >> "$GITHUB_OUTPUT"
 
   ## Job 2: Print the output of the "define-matrix" job
   print-output:
