@@ -1,8 +1,10 @@
-# Here is a **_READ_** ME file
+# General notes I've collected
 
 ## GitHub Actions Status
 
 [![Test Loop](https://github.com/RickyCartner/Notes/actions/workflows/test-loop2.yml/badge.svg?branch=development)](https://github.com/RickyCartner/Notes/actions/workflows/test-loop2.yml)
+
+## Default **_READ ME_** file
 
 ```
 install -v cicada.tct temp.txt
