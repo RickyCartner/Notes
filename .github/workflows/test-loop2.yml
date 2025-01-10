@@ -15,8 +15,9 @@ jobs:
     steps:
       - name: Define Project String
         id: project-step
-        run: |
-          echo "json-project={\"count\":2,\"include\":[{\"project\":\"1\",\"config\":\"Debug\"},{\"project\":\"2\",\"config\":\"Release\"}]}" >> "$GITHUB_OUTPUT"
+        run: echo 'json-project={"count":2,"include":[{"project":"1","config":"Debug"},{"project":"2","config":"Release"}]}' >>"$GITHUB_OUTPUT"
+        # run: |
+        #   echo "json-project={\"count\":2,\"include\":[{\"project\":\"1\",\"config\":\"Debug\"},{\"project\":\"2\",\"config\":\"Release\"}]}" >> "$GITHUB_OUTPUT"
 
 
   # Job 2: Print the output of the "define-matrix" job
@@ -26,10 +27,11 @@ jobs:
 
     steps:
       - name: Print project-json variable
-        id: print-stuff
-        run: |
-          echo ${{ toJson(needs.define-matrix.outputs.json-project) }}
-          echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
+        # id: print-stuff
+        run: echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
+        # run: |
+        #   echo ${{ toJson(needs.define-matrix.outputs.json-project) }}
+        #   echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
         # echo ${{ toJson(needs.define-matrix.outputs.json-project) }} | jq -r '.include[].project'
 
   # Job 3: Loop through array
@@ -42,8 +44,9 @@ jobs:
         include: ${{ fromJson(needs.define-matrix.outputs.json-project).include }}
 
     steps:
-      - name: Print project-json variable
-        id: print-array-item
-        run: |
-          echo "The project ID is: ${{ matrix.project }}"
+      - name: Print project-json variable | ${{ matrix.project }}
+        # id: print-array-item
+        run: echo '${{ matrix.project }} | ${{ matrix.config }}'
+        # run: |
+        #   echo "The project ID is: ${{ matrix.project }}"
         # echo ${{ matrix }} | jq -r '.project'
