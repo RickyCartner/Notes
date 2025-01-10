@@ -1,4 +1,8 @@
-Here is a **_READ_** ME file
+# Here is a **_READ_** ME file
+
+## GitHub Actions Status
+
+[![Test Loop](https://github.com/RickyCartner/Notes/actions/workflows/test-loop2.yml/badge.svg?branch=development)](https://github.com/RickyCartner/Notes/actions/workflows/test-loop2.yml)
 
 ```
 install -v cicada.tct temp.txt
